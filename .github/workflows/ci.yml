@@ -1,0 +1,25 @@
+name: C++ CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build benchmark app
+        run: g++ -std=c++17 -O2 -Wall -Wextra -pedantic main.cpp src/random_quarter_sort.cpp src/dual_pivot_quicksort.cpp -o benchmark
+
+      - name: Build tests
+        run: g++ -std=c++17 -O2 -Wall -Wextra -pedantic tests/tests.cpp src/random_quarter_sort.cpp src/dual_pivot_quicksort.cpp -o tests_runner
+
+      - name: Run tests
+        run: ./tests_runner
+
+      - name: Smoke benchmark
+        run: ./benchmark --sizes=10000 --correctness-cases=200 --trials-medium=5 --trials-small=5 --trials-large=5 --trials-huge=5 --algo=all

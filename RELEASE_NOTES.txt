@@ -1,0 +1,31 @@
+Random Splitting Sort - Release Notes
+Date: 2026-03-02
+Version: 1.0.0
+
+Highlights
+- Refactored into reusable library structure:
+  - include/Random_Splitting_Sort.hpp
+  - src/Random_Splitting_Sort.cpp
+- Added configurable benchmark CLI in main.cpp.
+- Added deterministic/randomized correctness tests in tests/tests.cpp.
+- Added CI pipeline (.github/workflows/ci.yml) to build and test automatically.
+- Added project documentation (README.md).
+- Added safety controls for:
+  - max input size
+  - max estimated RAM
+  - max single-run execution time
+
+CLI Features
+- Configurable sizes, seed, trial counts, and value range.
+- Configurable algorithm knobs:
+  - small-threshold
+  - sample-size
+- `--help` usage output.
+
+Quality
+- Local test runner: passing.
+- CI workflow: configured for build + tests + smoke benchmark.
+
+Notes
+- std::sort remains the default production baseline for most workloads.
+- RandomSplittingSorter is released as a robust experimental/research sorter with strong validation tooling.

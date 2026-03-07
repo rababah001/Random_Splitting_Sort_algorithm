@@ -1,0 +1,12 @@
+# Build artifacts
+*.exe
+*.obj
+*.ilk
+*.pdb
+
+# Common build directories
+build/
+out/
+
+# Editor
+.vscode/*.log
