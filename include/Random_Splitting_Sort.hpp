@@ -10,7 +10,7 @@
 namespace rssort {
 
 struct SortConfig {
-    std::size_t small_threshold = 64;
+    std::size_t small_threshold = 8192;
     std::size_t sample_size = 9;
 };
 
