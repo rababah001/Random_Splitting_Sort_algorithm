@@ -26,12 +26,12 @@ This project also includes a paper-inspired Dual-Pivot Quicksort implementation 
 ## Build
 ### Benchmark app
 ```bash
-g++ -std=c++17 -O2 -Wall -Wextra -pedantic main.cpp src/Random_Splitting_Sort.cpp src/dual_pivot_quicksort.cpp -o benchmark
+g++ -std=c++20 -O2 -Wall -Wextra -pedantic main.cpp src/Random_Splitting_Sort.cpp src/dual_pivot_quicksort.cpp -o benchmark
 ```
 
 ### Tests
 ```bash
-g++ -std=c++17 -O2 -Wall -Wextra -pedantic tests/tests.cpp src/Random_Splitting_Sort.cpp src/dual_pivot_quicksort.cpp -o tests_runner
+g++ -std=c++20 -O2 -Wall -Wextra -pedantic tests/tests.cpp src/Random_Splitting_Sort.cpp src/dual_pivot_quicksort.cpp -o tests_runner
 ./tests_runner
 ```
 
@@ -43,7 +43,7 @@ g++ -std=c++17 -O2 -Wall -Wextra -pedantic tests/tests.cpp src/Random_Splitting_
 ### Useful options
 - `--algo=all|rs|std|dual`
 - `--seed=20260302`
-- `--small-threshold=64`
+- `--small-threshold=8192`
 - `--sample-size=9`
 - `--max-elements=2000000`
 - `--max-ram-gib=0.5`
@@ -53,7 +53,7 @@ g++ -std=c++17 -O2 -Wall -Wextra -pedantic tests/tests.cpp src/Random_Splitting_
 ## Complexity Notes
 ### RandomSplitting
 - Expected near `O(n log n)` with balanced partitions.
-- Uses temporary partition vectors: `O(n)` extra memory.
+- In-place partitioning: `O(log n)` extra memory (recursion stack only).
 - Has safeguards (depth limit + degenerate split fallback).
 
 ### DualPivot
