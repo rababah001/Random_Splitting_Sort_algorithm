@@ -33,8 +33,16 @@ private:
     std::mt19937 rng_;
     SortConfig config_;
 
-    std::array<int, 3> choose_pivots(const std::vector<int>& data);
-    void random_splitting_sort(std::vector<int>& data, std::size_t depth_left);
+    std::array<int, 3> choose_pivots(
+        std::vector<int>& data, std::size_t left, std::size_t right);
+
+    std::array<std::size_t, 3> partition_four_way(
+        std::vector<int>& data, std::size_t left, std::size_t right,
+        int pivot_low, int pivot_mid, int pivot_high);
+
+    void random_splitting_sort(
+        std::vector<int>& data, std::size_t left, std::size_t right,
+        std::size_t depth_left);
 };
 
 MemoryEstimate estimate_sort_ram_usage(std::size_t n);

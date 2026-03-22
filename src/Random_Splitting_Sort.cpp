@@ -25,14 +25,16 @@ void RandomSplittingSorter::sort(std::vector<int>& data) {
     }
     depth_limit *= 2;
 
-    random_splitting_sort(data, depth_limit);
+    random_splitting_sort(data, 0, data.size() - 1, depth_limit);
 }
 
-std::array<int, 3> RandomSplittingSorter::choose_pivots(const std::vector<int>& data) {
-    const std::size_t n = data.size();
-    const std::size_t sample_count = std::min(config_.sample_size, n);
+std::array<int, 3> RandomSplittingSorter::choose_pivots(
+    std::vector<int>& data, std::size_t left, std::size_t right)
+{
+    const std::size_t range_size = right - left + 1;
+    const std::size_t sample_count = std::min(config_.sample_size, range_size);
 
-    std::uniform_int_distribution<std::size_t> dist(0, n - 1);
+    std::uniform_int_distribution<std::size_t> dist(left, right);
     std::vector<int> sample;
     sample.reserve(sample_count);
 
@@ -43,62 +45,92 @@ std::array<int, 3> RandomSplittingSorter::choose_pivots(const std::vector<int>& 
     std::sort(sample.begin(), sample.end());
 
     const std::size_t s = sample.size();
-    int p1 = sample[s / 4];
-    int p2 = sample[s / 2];
-    int p3 = sample[(3 * s) / 4];
+    int pivot_low  = sample[s / 4];
+    int pivot_mid  = sample[s / 2];
+    int pivot_high = sample[(3 * s) / 4];
 
-    if (p1 > p2) std::swap(p1, p2);
-    if (p2 > p3) std::swap(p2, p3);
-    if (p1 > p2) std::swap(p1, p2);
+    if (pivot_low > pivot_mid)  std::swap(pivot_low, pivot_mid);
+    if (pivot_mid > pivot_high) std::swap(pivot_mid, pivot_high);
+    if (pivot_low > pivot_mid)  std::swap(pivot_low, pivot_mid);
 
-    return {p1, p2, p3};
+    return {pivot_low, pivot_mid, pivot_high};
 }
 
-void RandomSplittingSorter::random_splitting_sort(std::vector<int>& data, std::size_t depth_left) {
-    const std::size_t n = data.size();
-    if (n <= 1) {
+std::array<std::size_t, 3> RandomSplittingSorter::partition_four_way(
+    std::vector<int>& data, std::size_t left, std::size_t right,
+    int pivot_low, int pivot_mid, int pivot_high)
+{
+    std::size_t low     = left;
+    std::size_t middle  = left;
+    std::size_t current = left;
+    std::size_t high    = right;
+
+    while (current <= high) {
+        if (data[current] < pivot_low) {
+            if (current != middle) std::swap(data[current], data[middle]);
+            if (middle != low)     std::swap(data[low], data[middle]);
+            ++low;
+            ++middle;
+            ++current;
+        }
+        else if (data[current] < pivot_mid) {
+            if (current != middle) std::swap(data[current], data[middle]);
+            ++middle;
+            ++current;
+        }
+        else if (data[current] < pivot_high) {
+            ++current;
+        }
+        else {
+            std::swap(data[current], data[high]);
+            if (high == 0) break;
+            --high;
+        }
+    }
+
+    return {low, middle, high + 1};
+}
+
+void RandomSplittingSorter::random_splitting_sort(
+    std::vector<int>& data, std::size_t left, std::size_t right,
+    std::size_t depth_left)
+{
+    if (left >= right) return;
+
+    const std::size_t range_size = right - left + 1;
+
+    if (range_size <= config_.small_threshold || depth_left == 0) {
+        std::sort(data.begin() + static_cast<long>(left),
+                  data.begin() + static_cast<long>(right) + 1);
         return;
     }
 
-    if (n <= config_.small_threshold || depth_left == 0) {
-        std::sort(data.begin(), data.end());
+    const auto pivots = choose_pivots(data, left, right);
+    const auto bounds = partition_four_way(
+        data, left, right, pivots[0], pivots[1], pivots[2]);
+
+    const std::size_t boundary_one   = bounds[0];
+    const std::size_t boundary_two   = bounds[1];
+    const std::size_t boundary_three = bounds[2];
+
+    bool degenerate_split =
+        (boundary_one == left && boundary_two == left && boundary_three == left) ||
+        (boundary_one == right + 1 && boundary_two == right + 1 && boundary_three == right + 1);
+
+    if (degenerate_split) {
+        std::sort(data.begin() + static_cast<long>(left),
+                  data.begin() + static_cast<long>(right) + 1);
         return;
     }
 
-    const auto pivots = choose_pivots(data);
-    const int p1 = pivots[0];
-    const int p2 = pivots[1];
-    const int p3 = pivots[2];
-
-    std::vector<int> q1, q2, q3, q4;
-
-    q1.reserve(n / 4 + 8);
-    q2.reserve(n / 4 + 8);
-    q3.reserve(n / 4 + 8);
-    q4.reserve(n / 4 + 8);
-
-    for (int value : data) {
-        if (value < p1)       q1.push_back(value);
-        else if (value < p2)  q2.push_back(value);
-        else if (value < p3)  q3.push_back(value);
-        else                  q4.push_back(value);
-    }
-
-    if (q1.size() == n || q2.size() == n || q3.size() == n || q4.size() == n) {
-        std::sort(data.begin(), data.end());
-        return;
-    }
-
-    random_splitting_sort(q1, depth_left - 1);
-    random_splitting_sort(q2, depth_left - 1);
-    random_splitting_sort(q3, depth_left - 1);
-    random_splitting_sort(q4, depth_left - 1);
-
-    std::size_t pos = 0;
-    for (int v : q1) data[pos++] = v;
-    for (int v : q2) data[pos++] = v;
-    for (int v : q3) data[pos++] = v;
-    for (int v : q4) data[pos++] = v;
+    if (boundary_one > left)
+        random_splitting_sort(data, left, boundary_one - 1, depth_left - 1);
+    if (boundary_two > boundary_one)
+        random_splitting_sort(data, boundary_one, boundary_two - 1, depth_left - 1);
+    if (boundary_three > boundary_two)
+        random_splitting_sort(data, boundary_two, boundary_three - 1, depth_left - 1);
+    if (right >= boundary_three)
+        random_splitting_sort(data, boundary_three, right, depth_left - 1);
 }
 
 MemoryEstimate estimate_sort_ram_usage(std::size_t n) {
