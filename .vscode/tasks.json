@@ -58,6 +58,125 @@
             "detail": "Build benchmark app with MSVC and /FS PDB lock protection."
         },
         {
+            "label": "Build Benchmark (g++ -O3)",
+            "type": "shell",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++17",
+                "-O3",
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-g",
+                "main.cpp",
+                "src/Random_Splitting_Sort.cpp",
+                "src/dual_pivot_quicksort.cpp",
+                "-o",
+                "benchmark_O3.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Build with aggressive optimization (-O3)."
+        },
+        {
+            "label": "Build Benchmark (g++ -O3 native)",
+            "type": "shell",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++17",
+                "-O3",
+                "-march=native",
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-g",
+                "main.cpp",
+                "src/Random_Splitting_Sort.cpp",
+                "src/dual_pivot_quicksort.cpp",
+                "-o",
+                "benchmark_O3_native.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Build with aggressive optimization and CPU-specific instructions (-O3 -march=native)."
+        },
+        {
+            "label": "Build Benchmark (g++ -O1)",
+            "type": "shell",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++17",
+                "-O1",
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-g",
+                "main.cpp",
+                "src/Random_Splitting_Sort.cpp",
+                "src/dual_pivot_quicksort.cpp",
+                "-o",
+                "benchmark_O1.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Build with basic optimization (-O1) for comparison."
+        },
+        {
+            "label": "Build Benchmark (MSVC /O2)",
+            "type": "shell",
+            "command": "cl.exe",
+            "args": [
+                "/O2",
+                "/Zi",
+                "/FS",
+                "/EHsc",
+                "/nologo",
+                "/std:c++17",
+                "/Fe:benchmark_msvc_O2.exe",
+                "main.cpp",
+                "src\\Random_Splitting_Sort.cpp",
+                "src\\dual_pivot_quicksort.cpp"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Build with MSVC maximum optimization (/O2)."
+        },
+        {
             "label": "Build Tests (g++)",
             "type": "shell",
             "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
