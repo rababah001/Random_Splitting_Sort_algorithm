@@ -385,7 +385,7 @@ int main(int argc, char** argv) {
             std::cout << "DualPivot       avg/min/max: " << dual_stats.avg_ms << " / " << dual_stats.min_ms << " / " << dual_stats.max_ms << " ms\n";
         }
 
-        if (cfg.algo == AlgoMode::All && std_stats.avg_ms > 0.0) {
+        if (cfg.algo == AlgoMode::All && std_stats.avg_ms > 0.0 && dual_stats.avg_ms > 0.0) {
             std::cout << "Ratio (RandomSplitting/std::sort): " << (rs_stats.avg_ms / std_stats.avg_ms) << "x\n";
             std::cout << "Ratio (DualPivot/std::sort): " << (dual_stats.avg_ms / std_stats.avg_ms) << "x\n";
             std::cout << "Ratio (RandomSplitting/DualPivot): " << (rs_stats.avg_ms / dual_stats.avg_ms) << "x\n";

@@ -113,7 +113,8 @@ void DualPivotQuickSorter::sort(std::vector<int>& data) {
         return;
     }
 
-    // Keeps behavior deterministic when the class seed is changed in future variants.
+    // Current implementation is deterministic (Yaroslavskiy-style pivot selection by position).
+    // seed_ is reserved for future randomized variants but currently unused.
     (void)seed_;
     dual_pivot_quicksort(data, 0, static_cast<int>(data.size()) - 1, 3);
 }

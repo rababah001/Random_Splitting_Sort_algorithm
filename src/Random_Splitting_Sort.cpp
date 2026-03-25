@@ -82,8 +82,11 @@ std::array<std::size_t, 3> RandomSplittingSorter::partition_four_way(
         }
         else {
             std::swap(data[current], data[high]);
+            // Guard against underflow: if high is 0, the swapped element is now at position 0,
+            // which is correct for the high partition, so we can safely exit the loop.
             if (high == 0) break;
             --high;
+            // Note: current is NOT incremented - the swapped element needs re-evaluation
         }
     }
 
@@ -99,8 +102,8 @@ void RandomSplittingSorter::random_splitting_sort(
     const std::size_t range_size = right - left + 1;
 
     if (range_size <= config_.small_threshold || depth_left == 0) {
-        std::sort(data.begin() + static_cast<long>(left),
-                  data.begin() + static_cast<long>(right) + 1);
+        std::sort(data.begin() + static_cast<std::ptrdiff_t>(left),
+                  data.begin() + static_cast<std::ptrdiff_t>(right) + 1);
         return;
     }
 
@@ -112,13 +115,15 @@ void RandomSplittingSorter::random_splitting_sort(
     const std::size_t boundary_two   = bounds[1];
     const std::size_t boundary_three = bounds[2];
 
+    // boundary_one <= boundary_two <= boundary_three is always maintained by the partition.
+    // Checking the middle values is redundant and right+1 can overflow if right == SIZE_MAX.
     bool degenerate_split =
-        (boundary_one == left && boundary_two == left && boundary_three == left) ||
-        (boundary_one == right + 1 && boundary_two == right + 1 && boundary_three == right + 1);
+        (boundary_one == left && boundary_three <= left + 1) ||
+        (boundary_one >= right);
 
     if (degenerate_split) {
-        std::sort(data.begin() + static_cast<long>(left),
-                  data.begin() + static_cast<long>(right) + 1);
+        std::sort(data.begin() + static_cast<std::ptrdiff_t>(left),
+                  data.begin() + static_cast<std::ptrdiff_t>(right) + 1);
         return;
     }
 

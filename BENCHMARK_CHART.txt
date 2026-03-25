@@ -1,0 +1,136 @@
+# Performance Visualization - Sorting Algorithms Benchmark
+
+## Relative Performance (std::sort = 1.00x baseline)
+
+```
+Size: 1,000 elements
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+std::sort        1.00x ████████████████████████████████████████ 0.028 ms
+DualPivot        0.84x ██████████████████████████████████ 0.024 ms ⭐ FASTEST
+RandomSplitting  0.96x ███████████████████████████████████████ 0.027 ms
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Size: 10,000 elements
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+std::sort        1.00x ████████████████████████████████████████ 0.611 ms
+DualPivot        0.95x ██████████████████████████████████████ 0.582 ms ⭐ FASTEST
+RandomSplitting  0.98x ███████████████████████████████████████ 0.599 ms
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Size: 100,000 elements
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+std::sort        1.00x ████████████████████████████████████████ 12.371 ms
+DualPivot        0.71x ████████████████████████████████ 8.810 ms
+RandomSplitting  0.66x ██████████████████████████ 8.195 ms ⭐ FASTEST (34% faster!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Size: 1,000,000 elements
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+std::sort        1.00x ████████████████████████████████████████ 111.810 ms
+DualPivot        0.79x ███████████████████████████████ 87.795 ms ⭐ FASTEST
+RandomSplitting  1.00x ████████████████████████████████████████ 111.878 ms
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Size: 10,000,000 elements
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+std::sort        1.00x ████████████████████████████████████████ 1101 ms
+DualPivot        0.72x ████████████████████████████ 793 ms ⭐ FASTEST (28% faster!)
+RandomSplitting  0.99x ███████████████████████████████████████ 1086 ms
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Size: 100,000,000 elements
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+std::sort        1.00x ████████████████████████████████████████ 8501 ms
+DualPivot        0.98x ███████████████████████████████████████ 8336 ms ⭐ FASTEST
+RandomSplitting  1.13x ███████████████████████████████████████████████ 9645 ms
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+## Algorithm Win Distribution
+
+```
+Fastest Algorithm by Size:
+┌────────────┬──────────────────┬─────────┐
+│ Size       │ Winner           │ Margin  │
+├────────────┼──────────────────┼─────────┤
+│ 1K         │ DualPivot        │ -16%    │
+│ 10K        │ DualPivot        │ -5%     │
+│ 100K       │ RandomSplitting  │ -34% 🏆 │
+│ 1M         │ DualPivot        │ -21%    │
+│ 10M        │ DualPivot        │ -28%    │
+│ 100M       │ DualPivot        │ -2%     │
+└────────────┴──────────────────┴─────────┘
+
+Overall: DualPivot wins 5/6 benchmarks
+```
+
+## Speedup Factor (Higher = Better)
+
+```
+How much faster than std::sort?
+
+   1.5x ┤
+   1.4x ┤                                              RandomSplitting
+   1.3x ┤
+   1.2x ┤
+   1.1x ┤
+   1.0x ┼══════●═══════●═══════●═══════●═══════●═══  std::sort baseline
+   0.9x ┤      ▲       ▲       ▼       ▲       ▲
+   0.8x ┤      ▼       ▼                ▼       ▼      DualPivot
+   0.7x ┤                      ▼                ▼
+   0.6x ┤                      ▼
+        └──────┴───────┴───────┴───────┴───────┴────
+         1K    10K     100K    1M      10M     100M
+
+▼ = DualPivot faster than std::sort
+▲ = RandomSplitting faster than std::sort
+● = Approximately equal
+```
+
+## Performance Scaling
+
+```
+Time vs Input Size (log-log scale)
+
+Time (ms)
+10000 ┤                                         ○ std::sort (100M)
+      ┤                                         ◆ DualPivot (100M)
+ 1000 ┤                                    ○ std::sort (10M)
+      ┤                                    ◆ DualPivot (10M)
+  100 ┤                               ○ std::sort (1M)
+      ┤                               ◆ DualPivot (1M)
+   10 ┤                          ○ std::sort (100K)
+      ┤                      ◆ RandomSplitting (100K) ⭐
+    1 ┤                  ○
+      ┤              ◆
+  0.1 ┤          ◆
+  0.01┤      ◆
+      └─────┴────┴────┴────┴────┴────┴────
+       1K   10K  100K 1M   10M  100M 1B
+
+Slope ≈ O(n log n) for all algorithms ✓
+```
+
+## Key Takeaways
+
+✅ **DualPivot** is the overall winner (5/6 sizes)
+✅ **RandomSplitting** dominates at 100K (34% faster than std::sort!)
+✅ **std::sort** is competitive but rarely fastest
+✅ All algorithms scale as **O(n log n)** empirically
+✅ Choice matters: 28% performance difference at 10M elements
+
+## Data Export (CSV format)
+
+```csv
+Size,RandomSplitting_ms,StdSort_ms,DualPivot_ms,RS_Ratio,DP_Ratio
+1000,0.027,0.028,0.024,0.965,0.838
+10000,0.599,0.611,0.582,0.979,0.952
+100000,8.195,12.371,8.810,0.662,0.712
+1000000,111.878,111.810,87.795,1.001,0.785
+10000000,1086.077,1101.263,792.575,0.986,0.720
+100000000,9644.505,8500.973,8335.540,1.135,0.981
+```
+
+---
+Generated: 2026-03-26
+Platform: Windows 11, C++20, MinGW g++ 15.2.0
