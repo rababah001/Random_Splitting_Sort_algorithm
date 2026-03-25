@@ -1,5 +1,4 @@
 #include "../include/Random_Splitting_Sort.hpp"
-
 #include <algorithm>
 
 namespace rssort {
@@ -135,14 +134,17 @@ void RandomSplittingSorter::random_splitting_sort(
 
 MemoryEstimate estimate_sort_ram_usage(std::size_t n) {
     const std::size_t input_vector_bytes = n * sizeof(int);
-    const std::size_t temp_partition_bytes = n * sizeof(int);
-    const std::size_t algorithm_overhead_bytes = 4 * sizeof(std::vector<int>);
+    const std::size_t temp_partition_bytes = 0;
+
+    const std::size_t depth = n > 1 ? 2 * (std::bit_width(n) - 1) : 0;
+    const std::size_t stack_bytes = depth * 4 * sizeof(std::size_t);
+    const std::size_t sample_bytes = 9 * sizeof(int);
 
     return MemoryEstimate{
         input_vector_bytes,
         temp_partition_bytes,
-        algorithm_overhead_bytes,
-        input_vector_bytes + temp_partition_bytes + algorithm_overhead_bytes
+        stack_bytes + sample_bytes,
+        input_vector_bytes + stack_bytes + sample_bytes
     };
 }
 
