@@ -6,7 +6,7 @@
             "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-std=c++17",
+                "-std=c++20",
                 "-O2",
                 "-Wall",
                 "-Wextra",
@@ -39,7 +39,7 @@
                 "/FS",
                 "/EHsc",
                 "/nologo",
-                "/std:c++17",
+                "/std:c++20",
                 "/Fe:benchmark.exe",
                 "main.cpp",
                 "src\\Random_Splitting_Sort.cpp",
@@ -182,7 +182,7 @@
             "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-std=c++17",
+                "-std=c++20",
                 "-O2",
                 "-Wall",
                 "-Wextra",
@@ -209,7 +209,7 @@
             "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-std=c++17",
+                "-std=c++20",
                 "-O2",
                 "-g",
                 "main.cpp",

@@ -1,6 +1,6 @@
 #include "../include/Random_Splitting_Sort.hpp"
 #include <algorithm>
-
+#include <bit>
 namespace rssort {
 
 RandomSplittingSorter::RandomSplittingSorter(std::uint32_t seed, SortConfig config)
