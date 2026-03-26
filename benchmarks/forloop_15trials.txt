@@ -1,0 +1,5 @@
+10000, | loop: 1.881 | std: / | ratio: 1.060x
+75000, | loop: 9.743 | std: / | ratio: 1.046x
+200000, | loop: 20.532 | std: / | ratio: 0.757x
+300000, | loop: 34.183 | std: / | ratio: 0.871x
+1000000, | loop: 85.761 | std: / | ratio: 0.779x

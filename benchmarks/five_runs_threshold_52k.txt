@@ -1,0 +1,220 @@
+=== RUN 1 ===
+Correctness: PASSED (5000 random cases)
+
+Benchmark
+
+N = 1000, Trials = 200
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 0.146 / 0.023 / 7.115 ms
+std::sort       avg/min/max: 0.119 / 0.018 / 7.598 ms
+DualPivot       avg/min/max: 0.090 / 0.023 / 4.797 ms
+Ratio (RandomSplitting/std::sort): 1.231x
+Ratio (DualPivot/std::sort): 0.760x
+Ratio (RandomSplitting/DualPivot): 1.620x
+
+N = 10000, Trials = 100
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 1.592 / 0.617 / 11.725 ms
+std::sort       avg/min/max: 0.596 / 0.481 / 0.934 ms
+DualPivot       avg/min/max: 0.544 / 0.472 / 0.696 ms
+Ratio (RandomSplitting/std::sort): 2.671x
+Ratio (DualPivot/std::sort): 0.912x
+Ratio (RandomSplitting/DualPivot): 2.928x
+
+N = 100000, Trials = 30
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 8.649 / 5.125 / 18.256 ms
+std::sort       avg/min/max: 7.783 / 5.654 / 18.163 ms
+DualPivot       avg/min/max: 9.415 / 4.682 / 28.721 ms
+Ratio (RandomSplitting/std::sort): 1.111x
+Ratio (DualPivot/std::sort): 1.210x
+Ratio (RandomSplitting/DualPivot): 0.919x
+
+N = 1000000, Trials = 10
+Estimated RAM peak (RandomSplitting): 0.004 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 88.300 / 70.971 / 132.741 ms
+std::sort       avg/min/max: 149.995 / 80.277 / 257.524 ms
+DualPivot       avg/min/max: 117.314 / 87.414 / 153.577 ms
+Ratio (RandomSplitting/std::sort): 0.589x
+Ratio (DualPivot/std::sort): 0.782x
+Ratio (RandomSplitting/DualPivot): 0.753x
+=== RUN 2 ===
+Correctness: PASSED (5000 random cases)
+
+Benchmark
+
+N = 1000, Trials = 200
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 0.022 / 0.015 / 0.079 ms
+std::sort       avg/min/max: 0.016 / 0.011 / 0.072 ms
+DualPivot       avg/min/max: 0.015 / 0.013 / 0.037 ms
+Ratio (RandomSplitting/std::sort): 1.402x
+Ratio (DualPivot/std::sort): 0.943x
+Ratio (RandomSplitting/DualPivot): 1.486x
+
+N = 10000, Trials = 100
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 1.462 / 0.386 / 5.960 ms
+std::sort       avg/min/max: 0.723 / 0.402 / 5.688 ms
+DualPivot       avg/min/max: 0.452 / 0.368 / 0.757 ms
+Ratio (RandomSplitting/std::sort): 2.021x
+Ratio (DualPivot/std::sort): 0.624x
+Ratio (RandomSplitting/DualPivot): 3.236x
+
+N = 100000, Trials = 30
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 10.097 / 4.599 / 30.946 ms
+std::sort       avg/min/max: 8.205 / 4.784 / 22.410 ms
+DualPivot       avg/min/max: 8.282 / 4.611 / 23.761 ms
+Ratio (RandomSplitting/std::sort): 1.231x
+Ratio (DualPivot/std::sort): 1.009x
+Ratio (RandomSplitting/DualPivot): 1.219x
+
+N = 1000000, Trials = 10
+Estimated RAM peak (RandomSplitting): 0.004 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 101.086 / 57.956 / 191.333 ms
+std::sort       avg/min/max: 110.094 / 94.051 / 132.011 ms
+DualPivot       avg/min/max: 120.323 / 83.789 / 154.603 ms
+Ratio (RandomSplitting/std::sort): 0.918x
+Ratio (DualPivot/std::sort): 1.093x
+Ratio (RandomSplitting/DualPivot): 0.840x
+=== RUN 3 ===
+Correctness: PASSED (5000 random cases)
+
+Benchmark
+
+N = 1000, Trials = 200
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 0.017 / 0.015 / 0.035 ms
+std::sort       avg/min/max: 0.073 / 0.012 / 0.197 ms
+DualPivot       avg/min/max: 0.017 / 0.013 / 0.039 ms
+Ratio (RandomSplitting/std::sort): 0.230x
+Ratio (DualPivot/std::sort): 0.231x
+Ratio (RandomSplitting/DualPivot): 0.998x
+
+N = 10000, Trials = 100
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 0.439 / 0.386 / 0.689 ms
+std::sort       avg/min/max: 0.450 / 0.394 / 0.786 ms
+DualPivot       avg/min/max: 0.545 / 0.369 / 4.199 ms
+Ratio (RandomSplitting/std::sort): 0.975x
+Ratio (DualPivot/std::sort): 1.212x
+Ratio (RandomSplitting/DualPivot): 0.805x
+
+N = 100000, Trials = 30
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 6.338 / 4.595 / 17.219 ms
+std::sort       avg/min/max: 11.466 / 5.422 / 24.963 ms
+DualPivot       avg/min/max: 6.806 / 4.859 / 18.774 ms
+Ratio (RandomSplitting/std::sort): 0.553x
+Ratio (DualPivot/std::sort): 0.594x
+Ratio (RandomSplitting/DualPivot): 0.931x
+
+N = 1000000, Trials = 10
+Estimated RAM peak (RandomSplitting): 0.004 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 92.750 / 60.655 / 143.891 ms
+std::sort       avg/min/max: 132.297 / 59.704 / 192.826 ms
+DualPivot       avg/min/max: 120.243 / 93.304 / 148.034 ms
+Ratio (RandomSplitting/std::sort): 0.701x
+Ratio (DualPivot/std::sort): 0.909x
+Ratio (RandomSplitting/DualPivot): 0.771x
+=== RUN 4 ===
+Correctness: PASSED (5000 random cases)
+
+Benchmark
+
+N = 1000, Trials = 200
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 0.018 / 0.017 / 0.035 ms
+std::sort       avg/min/max: 0.024 / 0.014 / 0.083 ms
+DualPivot       avg/min/max: 0.065 / 0.013 / 0.285 ms
+Ratio (RandomSplitting/std::sort): 0.786x
+Ratio (DualPivot/std::sort): 2.760x
+Ratio (RandomSplitting/DualPivot): 0.285x
+
+N = 10000, Trials = 100
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 0.501 / 0.390 / 0.822 ms
+std::sort       avg/min/max: 0.735 / 0.386 / 5.480 ms
+DualPivot       avg/min/max: 0.437 / 0.365 / 0.692 ms
+Ratio (RandomSplitting/std::sort): 0.682x
+Ratio (DualPivot/std::sort): 0.595x
+Ratio (RandomSplitting/DualPivot): 1.147x
+
+N = 100000, Trials = 30
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 11.259 / 4.881 / 30.750 ms
+std::sort       avg/min/max: 9.768 / 4.767 / 23.654 ms
+DualPivot       avg/min/max: 9.751 / 4.671 / 27.281 ms
+Ratio (RandomSplitting/std::sort): 1.153x
+Ratio (DualPivot/std::sort): 0.998x
+Ratio (RandomSplitting/DualPivot): 1.155x
+
+N = 1000000, Trials = 10
+Estimated RAM peak (RandomSplitting): 0.004 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 91.905 / 65.107 / 141.973 ms
+std::sort       avg/min/max: 111.357 / 83.432 / 147.694 ms
+DualPivot       avg/min/max: 121.284 / 88.451 / 171.354 ms
+Ratio (RandomSplitting/std::sort): 0.825x
+Ratio (DualPivot/std::sort): 1.089x
+Ratio (RandomSplitting/DualPivot): 0.758x
+=== RUN 5 ===
+Correctness: PASSED (5000 random cases)
+
+Benchmark
+
+N = 1000, Trials = 200
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 0.018 / 0.013 / 0.061 ms
+std::sort       avg/min/max: 0.016 / 0.011 / 0.053 ms
+DualPivot       avg/min/max: 0.023 / 0.013 / 0.176 ms
+Ratio (RandomSplitting/std::sort): 1.180x
+Ratio (DualPivot/std::sort): 1.456x
+Ratio (RandomSplitting/DualPivot): 0.811x
+
+N = 10000, Trials = 100
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 0.605 / 0.391 / 4.950 ms
+std::sort       avg/min/max: 1.088 / 0.391 / 8.245 ms
+DualPivot       avg/min/max: 0.551 / 0.363 / 4.066 ms
+Ratio (RandomSplitting/std::sort): 0.555x
+Ratio (DualPivot/std::sort): 0.506x
+Ratio (RandomSplitting/DualPivot): 1.097x
+
+N = 100000, Trials = 30
+Estimated RAM peak (RandomSplitting): 0.000 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 8.972 / 4.710 / 30.602 ms
+std::sort       avg/min/max: 9.989 / 4.759 / 21.780 ms
+DualPivot       avg/min/max: 10.506 / 4.681 / 19.187 ms
+Ratio (RandomSplitting/std::sort): 0.898x
+Ratio (DualPivot/std::sort): 1.052x
+Ratio (RandomSplitting/DualPivot): 0.854x
+
+N = 1000000, Trials = 10
+Estimated RAM peak (RandomSplitting): 0.004 GiB
+Estimated extra RAM (DualPivot stack): 0.000 GiB
+RandomSplitting avg/min/max: 94.483 / 50.376 / 127.186 ms
+std::sort       avg/min/max: 126.727 / 64.206 / 193.402 ms
+DualPivot       avg/min/max: 116.240 / 70.925 / 175.776 ms
+Ratio (RandomSplitting/std::sort): 0.746x
+Ratio (DualPivot/std::sort): 0.917x
+Ratio (RandomSplitting/DualPivot): 0.813x
