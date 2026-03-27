@@ -1,5 +1,6 @@
 #include "../include/Random_Splitting_Sort.hpp"
 #include <algorithm>
+#include <array>
 #include <bit>
 #include <cmath>
 #include <cstring>
@@ -156,6 +157,67 @@ void RandomSplittingSorter::distribution_sort(std::vector<int>& data) {
         if (data[i] > max_val) max_val = data[i];
     }
     if (min_val == max_val) return;  // all equal
+
+    // Guard: detect near-uniform data (heavy duplicates)
+    // Only run expensive duplicate detection at 2M+ where it pays off
+    if (n >= 2'000'000) {
+        std::array<int, 32> sample;
+        for (int i = 0; i < 32; ++i)
+            sample[i] = data[rng_.uniform(0, n - 1)];
+
+        std::sort(sample.begin(), sample.end());
+
+        int best_val = sample[16]; // start with median
+        int best_count = 1, cur_count = 1;
+        for (int i = 1; i < 32; ++i) {
+            if (sample[i] == sample[i-1]) ++cur_count;
+            else cur_count = 1;
+            if (cur_count > best_count) {
+                best_count = cur_count;
+                best_val = sample[i];
+            }
+        }
+
+        if (best_count >= 20) {  // 60%+ of sample is same value
+            // One 3-way partition, equal zone is permanently done
+            int pivot = best_val;
+            std::size_t lo = 0, mid = 0, hi = n - 1;
+            while (mid <= hi) {
+                if (data[mid] < pivot)       std::swap(data[lo++], data[mid++]);
+                else if (data[mid] > pivot)  std::swap(data[mid], data[hi--]);
+                else                         ++mid;
+            }
+            // Create sub-vectors and re-sort through full pipeline
+            if (lo > 1) {
+                std::vector<int> left(data.begin(), data.begin() + lo);
+                sort(left);
+                std::copy(left.begin(), left.end(), data.begin());
+            }
+            if (hi < n - 1) {
+                std::vector<int> right(data.begin() + hi + 1, data.end());
+                sort(right);
+                std::copy(right.begin(), right.end(), data.begin() + hi + 1);
+            }
+            return;
+        }
+    }
+
+    // Guard: detect sorted or reverse-sorted input
+    // Sample 12 evenly-spaced elements, check if already ordered
+    {
+        bool is_sorted = true, is_reverse = true;
+        const std::size_t step = n / 12;
+        for (std::size_t i = step; i < n; i += step) {
+            if (data[i] <= data[i - step]) is_sorted = false;   // must be strictly increasing
+            if (data[i] >= data[i - step]) is_reverse = false;  // must be strictly decreasing
+            if (!is_sorted && !is_reverse) break;
+        }
+        if (is_sorted) return;  // already sorted, done
+        if (is_reverse) {
+            std::reverse(data.begin(), data.end());
+            return;
+        }
+    }
 
     // ── Phase 2: Setup buckets ──
     // Target ~2048 elements per bucket so each fits in L1/L2.
